@@ -45,31 +45,28 @@ double brickHeight = 0.08;
 
 //Start Game
 void startGame(){
- if (!hasGameStarted) {
-    setState(() {
-      hasGameStarted = true;
-    });
+  hasGameStarted = true;
+  Timer.periodic(const Duration(milliseconds: 10), (sabiTimer) {
 
-    Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      // Update Direction
-      updateDirection();
 
-      // Move ball
-      moveBall();
+    //Update Direction
+    updateDirection();
 
-      // Check if game is over
-      if (isPlayerDead()) {
-        timer.cancel();
-        setState(() {
-          isGameOver = true;
-        });
-      }
+    //Move ball
+    moveBall();
+    
 
-      // Check if brick is broken
-      checkForBrokenBricks();
-    });
-  }
-   
+    //Check if game is over
+    if(isPlayerDead()){
+      sabiTimer.cancel();
+      isGameOver = true;
+    }
+
+    //Check if brick is broken
+    checkForBrokenBricks();
+
+
+   });
 }
 
 void checkForBrokenBricks(){
@@ -102,11 +99,12 @@ bool isPlayerDead(){
 void moveBall(){
 setState(() {
 
-  //MOVE HORIZONTAL
+  // MOVE HORIZONTAL
     if(ballXDirection == direction.LEFT){
     ballX -= ballXincrements;
 
-  }else if(ballXDirection == direction.RIGHT){
+  }
+  else if(ballXDirection == direction.RIGHT){
     ballX += ballXincrements;
 
   }
@@ -120,6 +118,7 @@ setState(() {
     ballY -= ballYincrements;
 
   }
+
 });
 }
 
