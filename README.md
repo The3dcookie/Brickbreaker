@@ -1,6 +1,6 @@
 # flutter_brickbreaker
 
-A new Flutter project.
+A new Flutter brickbreaker game project.
 
 ## Getting Started
 
