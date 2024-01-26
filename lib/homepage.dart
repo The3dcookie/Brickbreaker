@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   double ballX = 0;
   double ballY = 0;
-  double ballXincrements = 0.01;
+  double ballXincrements = 0.02;
   double ballYincrements = 0.01;
   direction ballXDirection = direction.DOWN;
   direction ballYDirection = direction.LEFT;
@@ -90,12 +90,77 @@ void checkForBrokenBricks(){
      MyBricks[i][2] == false){
       setState(() {
         MyBricks[i][2] = true;
-        ballYDirection = direction.DOWN;
+
+        //since brick is broken, updat the direction of the ball
+        //based on which side of the brick it hit
+        //to do this, calculate the distance of the ball from each of the 4 sides
+        //the smallest distance is the side of the ball that has it
+
+        double leftSideDist = (MyBricks[i][0] - ballX).abs();
+        double rightSideDist = (MyBricks[i][0] + brickWidth - ballX).abs();
+        double topSideDist = (MyBricks[i][1] - ballY).abs();
+        double bottomSideDist = (MyBricks[i][1] + brickHeight - ballY).abs();
+
+        String min = findMin(leftSideDist, rightSideDist, topSideDist, bottomSideDist);
+
+
+
+        switch (min) {
+          case "left" :
+           ballXDirection = direction.LEFT;
+            
+            break;
+            
+          case "right" :
+           ballXDirection = direction.RIGHT;
+            
+            break;
+            
+          case "top" :
+           ballYDirection = direction.UP;
+            
+            break;
+
+          case "bottom" :
+           ballYDirection = direction.DOWN;
+            
+            break;
+          default:
+        }
       });
 
   }
   }
 
+}
+
+String findMin(double a, double b, double c, double d){
+  List<double> myList = [
+    a,
+    b,
+    c,
+    d,
+  ];
+
+
+    double currentMin = a;
+    for (var i = 0; i < myList.length; i++) {
+      if (myList[i] < currentMin) {
+        currentMin = myList[i];
+      }
+    }
+
+    if((currentMin - a).abs() < 0.01){
+      return 'left';
+    }else if((currentMin - b).abs() < 0.01) {
+      return 'right';
+    }else if((currentMin - c).abs() < 0.01) {
+      return 'top';
+    }else if((currentMin - d).abs() < 0.01) {
+      return 'bottom';
+    }
+
+  return "";
 }
 
 //Is player dead
