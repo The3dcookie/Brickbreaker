@@ -13,7 +13,7 @@ final bool brickBroken;
   @override
   Widget build(BuildContext context) {
     return  brickBroken ? Container() : Container(
-                alignment: Alignment(brickX, brickY),
+                alignment: Alignment((2 * brickX + brickWidth) / (2 - brickWidth), brickY),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(2.5),
 

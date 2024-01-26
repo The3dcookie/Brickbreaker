@@ -24,28 +24,39 @@ class _HomePageState extends State<HomePage> {
   double ballY = 0;
   double ballXincrements = 0.01;
   double ballYincrements = 0.01;
-  var ballXDirection = direction.DOWN;
-  var ballYDirection = direction.LEFT;
+  direction ballXDirection = direction.DOWN;
+  direction ballYDirection = direction.LEFT;
 
 //Game Settings
 bool hasGameStarted = false;
 bool isGameOver = false;
-bool brickBroken = false;
+// bool brickBroken = false;
 
 //player variables
 double playerX = -0.2;
 double playerWidth = 0.4; //Out of 2
 
 //brick Variables
-double brickX = 0;
-double brickY = -0.9;
-double brickWidth = 0.4;
-double brickHeight = 0.08;
+static double firstBrickX = -1 + wallGap;
+static double firstBrickY = -0.9;
+static double brickWidth = 0.4;
+static double brickHeight = 0.08;
+static double brickGap = 0.01;
+static int numberOfBricksInRow = 3;
+static double wallGap = 0.5 * (2 - numberOfBricksInRow * brickWidth - (numberOfBricksInRow - 1) * brickGap );
+
+List MyBricks = [
+  //[x,y, broken = true/false]
+  [firstBrickX + 0 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 1 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 2 * (brickWidth + brickGap), firstBrickY, false],
+];
 
 
 //Start Game
 void startGame(){
   hasGameStarted = true;
+  
   ballYDirection = direction.DOWN;
   ballXDirection = direction.LEFT;
   Timer.periodic(const Duration(milliseconds: 10), (sabiTimer) {
@@ -72,16 +83,19 @@ void startGame(){
 
 void checkForBrokenBricks(){
   //Checks for when ball hits bottom of a brick
-  if(ballX >= brickX && 
-     ballX <= brickX + brickWidth && 
-     ballY <= brickY + brickHeight &&
-     brickBroken == false){
+  for(int i = 0; i < MyBricks.length; i++){
+      if(ballX >= MyBricks[i][0] && 
+     ballX <= MyBricks[i][0] + brickWidth && 
+     ballY <= MyBricks[i][1] + brickHeight &&
+     MyBricks[i][2] == false){
       setState(() {
-        brickBroken = true;
+        MyBricks[i][2] = true;
         ballYDirection = direction.DOWN;
       });
 
   }
+  }
+
 }
 
 //Is player dead
@@ -186,6 +200,15 @@ void moveRight(){
         if(event.isKeyPressed(LogicalKeyboardKey.keyK)){
           isGameOver = true;
         }
+
+        if(event.isKeyPressed(LogicalKeyboardKey.keyR)){
+          isGameOver = false;
+          hasGameStarted = false;
+          GameOverScreen(isGameOver: isGameOver);
+          CoverScreen(hasGameStarted: hasGameStarted);
+
+          startGame();
+        }
       },
 
 
@@ -234,13 +257,31 @@ void moveRight(){
               ),
               ),
 
+              // Bricks
+              MyBrick(
+                brickHeight: brickHeight,
+                brickWidth: brickWidth,
+                brickX: MyBricks[0][0],
+                brickY: MyBricks[0][1],
+                brickBroken: MyBricks[0][2],
+              ),
+
               //Bricks
               MyBrick(
                 brickHeight: brickHeight,
                 brickWidth: brickWidth,
-                brickX: brickX,
-                brickY: brickY,
-                brickBroken: brickBroken,
+                brickX: MyBricks[1][0],
+                brickY: MyBricks[1][1],
+                brickBroken: MyBricks[1][2],
+              ),
+              
+              //Bricks
+              MyBrick(
+                brickHeight: brickHeight,
+                brickWidth: brickWidth,
+                brickX: MyBricks[2][0],
+                brickY: MyBricks[2][1],
+                brickBroken: MyBricks[2][2],
               ),
 
 
