@@ -125,15 +125,23 @@ setState(() {
 
 //update direction
 void updateDirection(){
+  //Ball goes up when it hits the player
   if(ballY >= 0.9 && ballX >= playerX && ballX <= playerX + playerWidth){
     ballYDirection = direction.UP;
-  }else if(ballY <= -1){
+  }
+  
+  //Ball goes down when it hits the top of the screen
+  else if(ballY <= -1){
     ballYDirection = direction.DOWN;
   }
-
+  
+  
+  //Ball goes left when it hits the right wall
   if(ballX >= 1){
-    ballYDirection = direction.LEFT;
+    ballXDirection = direction.LEFT;
   }
+  
+  //Ball goes right when it hits the left wall
   else if(ballX <= -1){
     ballXDirection = direction.RIGHT;
   }
