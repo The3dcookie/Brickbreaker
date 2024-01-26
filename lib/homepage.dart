@@ -46,6 +46,8 @@ double brickHeight = 0.08;
 //Start Game
 void startGame(){
   hasGameStarted = true;
+  ballYDirection = direction.DOWN;
+  ballXDirection = direction.LEFT;
   Timer.periodic(const Duration(milliseconds: 10), (sabiTimer) {
 
 
@@ -54,7 +56,6 @@ void startGame(){
 
     //Move ball
     moveBall();
-    
 
     //Check if game is over
     if(isPlayerDead()){
@@ -132,7 +133,6 @@ void updateDirection(){
 
   if(ballX >= 1){
     ballYDirection = direction.LEFT;
-
   }
   else if(ballX <= -1){
     ballXDirection = direction.RIGHT;
