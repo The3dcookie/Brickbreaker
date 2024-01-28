@@ -8,7 +8,7 @@ final brickHeight;
 final brickWidth;
 final bool brickBroken;
 
- MyBrick({this.brickHeight, this.brickWidth, this.brickX, this.brickY, required this.brickBroken});
+ const MyBrick({super.key, this.brickHeight, this.brickWidth, this.brickX, this.brickY, required this.brickBroken});
 
   @override
   Widget build(BuildContext context) {

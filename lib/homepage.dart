@@ -81,6 +81,26 @@ void startGame(){
    });
 }
 
+void resetGame(){
+   setState(() {
+
+   playerX = -0.2;
+
+    ballX = 0;
+    ballY = 0;
+    isGameOver = false;
+    hasGameStarted = false;
+
+
+     MyBricks = [
+  //[x,y, broken = true/false]
+  [firstBrickX + 0 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 1 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 2 * (brickWidth + brickGap), firstBrickY, false],
+];
+   });
+}
+
 void checkForBrokenBricks(){
   //Checks for when ball hits bottom of a brick
   for(int i = 0; i < MyBricks.length; i++){
@@ -266,14 +286,14 @@ void moveRight(){
           isGameOver = true;
         }
 
-        if(event.isKeyPressed(LogicalKeyboardKey.keyR)){
-          isGameOver = false;
-          hasGameStarted = false;
-          GameOverScreen(isGameOver: isGameOver);
-          CoverScreen(hasGameStarted: hasGameStarted);
+        // if(event.isKeyPressed(LogicalKeyboardKey.keyR)){
+        //   isGameOver = false;
+        //   hasGameStarted = false;
+        //   GameOverScreen(isGameOver: isGameOver);
+        //   CoverScreen(hasGameStarted: hasGameStarted);
 
-          startGame();
-        }
+        //   startGame();
+        // }
       },
 
 
@@ -291,10 +311,10 @@ void moveRight(){
               CoverScreen(hasGameStarted: hasGameStarted),
 
               //Game Over Screen
-              GameOverScreen(isGameOver: isGameOver),
+              GameOverScreen(isGameOver: isGameOver, function: resetGame,),
       
               //ball
-             MyBall(ballX: ballX, ballY: ballY,),
+             MyBall(ballX: ballX, ballY: ballY, isGameOver: isGameOver,),
       
              //Player
              MyPlayer(
@@ -348,9 +368,6 @@ void moveRight(){
                 brickY: MyBricks[2][1],
                 brickBroken: MyBricks[2][2],
               ),
-
-
-      
       
             ],
           ),
