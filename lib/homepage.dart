@@ -314,7 +314,7 @@ void moveRight(){
               GameOverScreen(isGameOver: isGameOver, function: resetGame,),
       
               //ball
-             MyBall(ballX: ballX, ballY: ballY, isGameOver: isGameOver,),
+             MyBall(ballX: ballX, ballY: ballY, isGameOver: isGameOver,hasGameStarted: hasGameStarted,),
       
              //Player
              MyPlayer(
