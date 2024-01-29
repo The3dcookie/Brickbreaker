@@ -77,6 +77,8 @@ void startGame(){
     //Check if brick is broken
     checkForBrokenBricks();
 
+    debugzz;
+
 
    });
 }
@@ -267,6 +269,11 @@ void moveRight(){
   });
 }
 
+void debugzz(){
+  print("hasGameStarted: $hasGameStarted");
+print("isGameOver: $isGameOver");
+}
+
 
   @override 
   Widget build(BuildContext context){
@@ -308,7 +315,7 @@ void moveRight(){
           child: Stack(
             children: [
               //Tap To Play
-              CoverScreen(hasGameStarted: hasGameStarted),
+              CoverScreen(hasGameStarted: hasGameStarted, isGameOver: isGameOver,),
 
               //Game Over Screen
               GameOverScreen(isGameOver: isGameOver, function: resetGame,),
