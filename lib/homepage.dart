@@ -50,6 +50,8 @@ List MyBricks = [
   [firstBrickX + 0 * (brickWidth + brickGap), firstBrickY, false],
   [firstBrickX + 1 * (brickWidth + brickGap), firstBrickY, false],
   [firstBrickX + 2 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 0.5 * (brickWidth + brickGap), firstBrickY + 0.5 * (brickWidth + brickGap), false],
+  [firstBrickX + 1.5 * (brickWidth + brickGap), firstBrickY + 0.5 * (brickWidth + brickGap), false],
 ];
 
 
@@ -99,6 +101,8 @@ void resetGame(){
   [firstBrickX + 0 * (brickWidth + brickGap), firstBrickY, false],
   [firstBrickX + 1 * (brickWidth + brickGap), firstBrickY, false],
   [firstBrickX + 2 * (brickWidth + brickGap), firstBrickY, false],
+  [firstBrickX + 0.5 * (brickWidth + brickGap), firstBrickY + 0.5 * (brickWidth + brickGap), false],
+  [firstBrickX + 1.5 * (brickWidth + brickGap), firstBrickY + 0.5 * (brickWidth + brickGap), false],
 ];
    });
 }
@@ -329,25 +333,25 @@ print("isGameOver: $isGameOver");
               playerWidth: playerWidth,
              ),
 
-             //Where is player x exactly
-             Container(
-              alignment: Alignment(playerX, 0.9),
-              child: Container(
-                color: Colors.red,
-                width: 4,
-                height: 15,
-              ),
-              ),
+            //  //Where is player x exactly
+            //  Container(
+            //   alignment: Alignment(playerX, 0.9),
+            //   child: Container(
+            //     color: Colors.red,
+            //     width: 4,
+            //     height: 15,
+            //   ),
+            //   ),
 
-              //Where is player x green             
-              Container(
-              alignment: Alignment(playerX + playerWidth, 0.9),
-              child: Container(
-                color: Colors.green,
-                width: 4,
-                height: 15,
-              ),
-              ),
+            //   //Where is player x green             
+            //   Container(
+            //   alignment: Alignment(playerX + playerWidth, 0.9),
+            //   child: Container(
+            //     color: Colors.green,
+            //     width: 4,
+            //     height: 15,
+            //   ),
+            //   ),
 
               // Bricks
               MyBrick(
@@ -374,6 +378,24 @@ print("isGameOver: $isGameOver");
                 brickX: MyBricks[2][0],
                 brickY: MyBricks[2][1],
                 brickBroken: MyBricks[2][2],
+              ),
+
+                            //Bricks
+              MyBrick(
+                brickHeight: brickHeight,
+                brickWidth: brickWidth,
+                brickX: MyBricks[3][0],
+                brickY: MyBricks[3][1],
+                brickBroken: MyBricks[3][2],
+              ),
+              
+              //Bricks
+              MyBrick(
+                brickHeight: brickHeight,
+                brickWidth: brickWidth,
+                brickX: MyBricks[4][0],
+                brickY: MyBricks[4][1],
+                brickBroken: MyBricks[4][2],
               ),
       
             ],
